@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Clouser Example</title>
+<style>
+	p{		
+		height:50px;
+		background-color: #A7A7A7;
+		margin:0px;
+		border:1px solid black;
+		border-radius:5px;
+	}
+	#ball1,#ball2{
+		position:absolute;
+		top:5px;
+	}
+	
+	#content{
+	position:absolute;
+		top:50px;
+	}
+</style>
+</head>
+<body>
+<section id="ball1"><img src="image/football.png" alt="ball"/></section>
+<section id="ball2"><img src="image/tennis_ball.png" alt="ball"/></section>
+<section id="content"></section>
+<script>
+var distance=0;
+for(var i=1;i<=5;i++){
+	var pTag=document.createElement('p');
+	//pTag.innerHTML = 'Para ' + i;
+	distance=distance+50;
+	var sectionTag = document.getElementById('content');
+	sectionTag.appendChild(pTag);
+	animateIt(pTag,10,distance);
+}
+
+function animateIt(element,speed, distance){
+	var tick=0;
+	var timer = setInterval(function(){
+		if(tick <= distance){
+			element.style.width = tick+"px";
+			tick++;
+		}
+		else
+			clearInterval(timer);
+		
+	}, speed);
+}
+function animateBall( ball,speed, finalPos){
+	var ballElem = document.getElementById(ball);
+	//alert("ballelemt " + ballElem);
+	
+	var timer = setInterval(function(){		
+		if(ballElem.offsetTop <= 225){
+			ballElem.style.left=((ballElem.offsetLeft) + 50) + "px";
+			ballElem.style.top=((ballElem.offsetTop) + 50) + "px";	
+		}else{
+			clearInterval(timer);
+			ballElem.style.left=((ballElem.offsetLeft) + finalPos) + "px";
+			}
+	},speed);
+}
+
+animateBall('ball1',1500);
+animateBall('ball2',1000,50);
+</script>
+</body>
+</html>
