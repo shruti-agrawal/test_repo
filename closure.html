@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Clouser Example</title>
+<style type="text/css">
+
+.box {
+    position: absolute;
+    border: 3px solid blue;
+    width: 50px;
+    height: 50px;
+   
+}
+#box1 {
+    top:50px;
+     background-color: #6495ed;
+}
+#box2 {
+    top:100px;
+     background-color: #4659de;
+}
+#box3 {
+    top:150px;
+     background-color: #4659de;
+}
+#ball{
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+ p{
+	position: absolute;
+    border: 1px solid blue;
+    width: 50px;
+    height: 50px;
+}
+</style>
+</head>
+<body>
+<section id = "addbar"></section>
+<section id="ball"><img src="image/football.png" alt="ball"></section>
+<script>
+var distance=0, top = 0,left = 0;
+for(var i=1; i<=10; i++){
+	var addsection = document.getElementById('addbar');
+	var pTag = document.createElement('p');
+	pTag.style.top = (top+50)+"px";
+	pTag.id = 'b'+i ;
+	addsection.appendChild(pTag);
+	distance = distance+50;
+	animateIt(pTag,10, distance);
+	
+}
+function animateIt(element, speed , distance) {
+        var elem = document.getElementById(element);              
+        var tick = 0;                                               
+        var timer = setInterval(function(){
+          if (tick < distance) {
+            elem.style.width = tick + "px";
+            tick++;
+          }
+          else {
+            clearInterval(timer);
+          }
+        }, speed);
+
+}
+function animateBall(element, speed , distance) {
+    var elem = document.getElementById(element);              
+    var tick = 0;                                               
+    var timer = setInterval(function(){
+      if (tick < distance) {
+        elem.style.top = tick + "px";
+        tick++;
+      }
+      else {
+        clearInterval(timer);
+      }
+    }, speed);
+    
+}    
+/*function bounceBall(element, topPos, leftPos, speed) {
+	var elem = document.getElementById(element);
+	var timer = setTimeout(function(){setInterval(function(){
+	      if ((leftPos >= 0)&&(topPos >= 0)) {
+	    	  elem.style.top = topPos + "px";
+		        elem.style.left= leftPos +"px";
+		    	 topPos = topPos-50; 
+		    	 leftPos = leftPos-50;
+		        
+		      }
+		      else {
+		    	  elem.style.top = 0 + "px";
+			      elem.style.left= 0 +"px";
+		          clearInterval(timer);
+		      }
+		    },500) },speed);
+	
+} */  
+function bounceBall(element, topPos, leftPos, speed) { 
+	var elem = document.getElementById(element);
+	var timer = setTimeout(function(){setInterval(function(){
+	      if (leftPos<=500) {
+	    	  leftPos = leftPos+60;
+	    	  elem.style.left =leftPos+"px";
+	    	  topPos = topPos+50; 
+	    	  elem.style.top = topPos + "px";
+		      //elem.style.left= leftPos +"px";
+		      
+		        
+		      }
+		      else {  
+		          clearInterval(timer);
+		      }
+		    },400) },speed);	
+} 
+
+//animateIt('box1',10, 50);    
+//animateIt('box2',10, 100);  
+//animateIt('box3',10, 150); 
+//animateBall('ball',20,170);
+//bounceBall('ball', 0, 0, 3000);
+</script>
+</body>
+</html>
